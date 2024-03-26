@@ -1,4 +1,5 @@
 #include <iostream>
+#include <format>
 #include <stacktrace>
 
 class fib_with_stacktrace {
@@ -31,12 +32,18 @@ public:
 
 int main(void)
 {
-
   fib_with_stacktrace fib_wst;
 
   for (int i=0; i<10; ++i)
     std::cout << fib_wst.fib(i) << '\n';
 
   const std::stacktrace& trace = fib_wst.get_max_trace();
-  std::cout << "Max Depth was: " << trace.size() << '\n';
+  std::cout << "Max stack depth was: " << trace.size() << '\n';
+
+  for (const auto& t : trace)
+    std::cout <<
+      std::format (
+       "{}:{} {}\n",
+       t.source_file(), t.source_line(), t.description()
+    );
 }
