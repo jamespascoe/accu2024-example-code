@@ -35,7 +35,8 @@ int main(void)
   fib_with_stacktrace fib_wst;
 
   for (int i=0; i<10; ++i)
-    std::cout << fib_wst.fib(i) << '\n';
+    std::cout << fib_wst.fib(i) << ' ';
+  std::cout << '\n';
 
   const std::stacktrace& trace = fib_wst.get_max_trace();
   std::cout << "Max stack depth was: " << trace.size() << '\n';
